@@ -1,0 +1,11 @@
+{
+  "definitions": {
+    "myPost": "kjzl6cwe1jw145lfvzfruypqlhkl00oi1qnbzbrn2cdvno0o10h88lu5tfj2l1n"
+  },
+  "schemas": {
+    "AwakedPost": "ceramic://k3y52l7qbv1frxq8p12rc4n99aeqk36hzyx6sprc27826b8ptxkvvnvczbq0i85q8"
+  },
+  "tiles": {
+    "examplePost": "kjzl6cwe1jw148hswi8b65psj6t0poku11ctnrevkx04i0xq6g4y5fmu1jnbaxr"
+  }
+}

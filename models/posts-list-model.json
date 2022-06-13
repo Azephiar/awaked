@@ -1,0 +1,9 @@
+{
+  "definitions": {
+    "myPostsList": "kjzl6cwe1jw147bjfs1rkg08c5j79wbyytdc6pqqbh739ria6sxn1rdy9ptnoqb"
+  },
+  "schemas": {
+    "AwakedPostsList": "ceramic://k3y52l7qbv1fryfrsu2w1jldlvr39eloxxx6zhf8k54vj33oantfssnprqknt8tfk"
+  },
+  "tiles": {}
+}

@@ -1,0 +1,53 @@
+{
+  "name": "nextjs",
+  "version": "5.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && next export",
+    "start": "next start",
+    "lint": "next lint",
+    "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
+  },
+  "dependencies": {
+    "@3id/connect": "^0.2.5",
+    "@ceramicnetwork/3id-did-resolver": "^1.4.16",
+    "@ceramicnetwork/http-client": "^1.5.7",
+    "@ceramicnetwork/stream-tile": "^1.5.7",
+    "@ceramicstudio/idx": "^0.12.2",
+    "@emotion/cache": "latest",
+    "@emotion/react": "latest",
+    "@emotion/server": "latest",
+    "@emotion/styled": "latest",
+    "@glazed/datamodel": "^0.2.0",
+    "@glazed/devtools": "^0.1.5",
+    "@glazed/did-datastore": "^0.2.3",
+    "@mui/icons-material": "latest",
+    "@mui/lab": "^5.0.0-alpha.71",
+    "@mui/material": "latest",
+    "@stablelib/random": "^1.0.1",
+    "@walletconnect/web3-provider": "^1.7.1",
+    "api": "^4.2.0",
+    "authereum": "^0.1.14",
+    "axios": "^0.26.0",
+    "dids": "^2.4.3",
+    "dotenv": "^16.0.0",
+    "ethers": "^5.5.4",
+    "firebase": "^9.4.1",
+    "key-did-provider-ed25519": "^1.1.0",
+    "key-did-resolver": "^1.4.4",
+    "next": "latest",
+    "nft-did-resolver": "^1.0.0",
+    "opensea-js": "^2.0.1",
+    "prop-types": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-error-boundary": "^3.1.4",
+    "uint8arrays": "^3.0.0",
+    "web3modal": "^1.9.5"
+  },
+  "devDependencies": {
+    "eslint": "latest",
+    "eslint-config-next": "latest"
+  }
+}
