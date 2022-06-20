@@ -5,7 +5,7 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 import { EthereumAuthProvider } from "@3id/connect";
 import { Configuration } from "../../utils/constants";
 import { AlertContext } from "./AlertContext";
-import { Alert } from "@mui/material";
+
 const providerOptions = {
   injected: {
     package: null,
@@ -64,10 +64,7 @@ export const WalletContextProvider = (props) => {
   }, []);
 
   useEffect(() => {
-    if (
-      web3Modal?.cachedProvider &&
-      web3Modal?.cachedProvider != "walletconnect"
-    ) {
+    if (web3Modal?.cachedProvider && web3Modal?.cachedProvider != "walletconnect") {
       connect().catch((e) => {
         setIsConnecting(false);
         alert.show(e.message, "error");
@@ -100,27 +97,6 @@ export const WalletContextProvider = (props) => {
     return web3ModalInstance && authProvider;
   };
 
-  // const getProvider = async () => {
-  //   // Get the cached provider from LocalStorage
-  //   let cachedProvider = web3Modal?.cachedProvider;
-
-  //   if (cachedProvider == "injected") {
-  //     // Get the connector for the cachedProviderName
-  //     const connector = web3Modal.providerController.providers[0].connector;
-  //     // console.log("connector", connector.isAuthorized());
-  //     // // Evaluate connector() which returns a Proxy in the case of MetaMask
-  //     const proxy = await connector(); // Some connector may need providerPackage and opts
-  //     // console.log("Proxy", proxy);
-  //     console.log("connector", connector);
-  //     // Get the working provider from your favorite library (ethers, web3, ...)
-  //     const provider = new ethers.providers.Web3Provider(proxy); // If you use web3, then const web3 = new Web3(proxy);
-  //     console.log("Provider", provider);
-
-  //     // You can list the connected accounts without launching Web3Modal
-  //     console.log("Accounts", await provider.listAccounts()); // If you use web3, then await web3.eth.getAccounts();
-  //   }
-  // };
-
   //Wallet connection
   const connect = async () => {
     setIsConnecting(true);
@@ -132,10 +108,7 @@ export const WalletContextProvider = (props) => {
     const _signer = _provider.getSigner();
     const _address = await _signer.getAddress();
     const _addresses = await _web3ModalInstance.enable();
-    const _authProvider = new EthereumAuthProvider(
-      _web3ModalInstance,
-      _addresses[0]
-    );
+    const _authProvider = new EthereumAuthProvider(_web3ModalInstance, _addresses[0]);
 
     setAuthProvider(_authProvider);
     setWeb3ModalInstance(_web3ModalInstance);
@@ -164,9 +137,5 @@ export const WalletContextProvider = (props) => {
     deleteCache,
   };
 
-  return (
-    <WalletContext.Provider value={value}>
-      {props.children}
-    </WalletContext.Provider>
-  );
+  return <WalletContext.Provider value={value}>{props.children}</WalletContext.Provider>;
 };

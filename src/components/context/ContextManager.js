@@ -1,12 +1,7 @@
 import { useState, useEffect, useContext, createContext } from "react";
 import { createNftDidUrl } from "nft-did-resolver";
 import { fetchNftsOf } from "../../utils/openseaApi";
-import {
-  getNFTDidFromLocalStorage,
-  saveNFTDidToLocalStorage,
-  getNFTDataFromLocalStorage,
-  saveNFTDataToLocalStorage,
-} from "./LocalStorageManager";
+import { getNFTDidFromLocalStorage, saveNFTDidToLocalStorage, getNFTDataFromLocalStorage, saveNFTDataToLocalStorage } from "./LocalStorageManager";
 import { WalletContext } from "./WalletContext";
 import { FirebaseContext } from "./FirebaseContext";
 import { CeramicContext } from "./CeramicContext";
@@ -82,8 +77,7 @@ export const ContextManagerProvider = (props) => {
 
     //Fix lengths if too long
     if (nft.asset_contract.symbol.length > 10) {
-      nft.asset_contract.symbol =
-        nft.asset_contract.symbol.substring(10) + "...";
+      nft.asset_contract.symbol = nft.asset_contract.symbol.substring(10) + "...";
     }
 
     if (nft.token_id.length > 5) {
@@ -105,9 +99,5 @@ export const ContextManagerProvider = (props) => {
     setNFTDIDOf,
   };
 
-  return (
-    <ContextManager.Provider value={value}>
-      {props.children}
-    </ContextManager.Provider>
-  );
+  return <ContextManager.Provider value={value}>{props.children}</ContextManager.Provider>;
 };

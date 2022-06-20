@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import { AwaPaper, AddressTypography } from "../../styled";
+import { AwaPaper } from "../../styled";
 
 const NFTIndentifier = ({ symbol, tokenId, address }) => {
   return (

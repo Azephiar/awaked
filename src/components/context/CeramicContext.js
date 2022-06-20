@@ -1,26 +1,18 @@
 import { useState, useEffect, useContext, createContext } from "react";
-
 import { CeramicClient } from "@ceramicnetwork/http-client";
 import { DataModel } from "@glazed/datamodel";
 import { DIDDataStore } from "@glazed/did-datastore";
 import { DID } from "dids";
 import { getResolver as getKeyResolver } from "key-did-resolver";
 import { getResolver as get3IDResolver } from "@ceramicnetwork/3id-did-resolver";
-
 import { ThreeIdConnect } from "@3id/connect";
-
 import { TileDocument } from "@ceramicnetwork/stream-tile";
-
 import postAliases from "../../../models/post-model.json";
 import postListAliases from "../../../models/posts-list-model.json";
 import { TileLoader } from "@glazed/tile-loader";
 import { getNftDataFromNftDid } from "../../utils/utils";
 import { getNftAssetsFromOpensea } from "../../utils/openseaApi";
-import {
-  saveUserDidToLocalStorage,
-  getUserDidFromLocalStorage,
-  userDIDCacheExists,
-} from "./LocalStorageManager";
+import { saveUserDidToLocalStorage, userDIDCacheExists } from "./LocalStorageManager";
 
 import { WalletContext } from "./WalletContext";
 
@@ -113,11 +105,7 @@ export const CeramicContextProvider = (props) => {
     newPostArray.push({ id: postStreamID.toUrl() });
 
     //Save the new lists of posts
-    const postListStreamID = await store.set(
-      "myPostsList",
-      { posts: newPostArray },
-      { controller: nftDID }
-    );
+    const postListStreamID = await store.set("myPostsList", { posts: newPostArray }, { controller: nftDID });
 
     return { postListStreamID, postStreamID };
   };
@@ -132,12 +120,14 @@ export const CeramicContextProvider = (props) => {
     //(2) Fetch from IDX all the documents in the firebase.postList and sanitize the data
     let loaders = [];
 
-    firebasePostList.forEach((post) =>
-      loaders.push(loader.load(post.postStreamUrl))
-    );
+    firebasePostList.forEach((post) => loaders.push(loader.load(post.postStreamUrl)));
 
-    const postList = await Promise.all(loaders);
-    console.log("postList", postList);
+    let postList = [];
+    try {
+      postList = await Promise.all(loaders);
+    } catch (e) {
+      console.log("data cancelled from ceramic testnet");
+    }
 
     let dids = [];
     let posts = [];
@@ -162,46 +152,11 @@ export const CeramicContextProvider = (props) => {
     //3) Fetch NFT data (image, address, symbol, etc) from opensea
     let assets = await getNftAssetsFromOpensea(dids);
 
-    assets.forEach((nft) => {
-      if (
-        nft.asset_contract.address ==
-        "0xc78e3b835cba2313b95420d8157972c22ff1750f"
-      ) {
-        if (nft.token_id == "0") {
-          nft.image_url =
-            "https://gateway.pinata.cloud/ipfs/QmSwGHG5VG8EPwZMuhLLt83WQYD6rC7sarK5iKW6wByhs9/1.png";
-        }
-
-        if (nft.token_id == "1") {
-          nft.image_url =
-            "https://gateway.pinata.cloud/ipfs/QmSwGHG5VG8EPwZMuhLLt83WQYD6rC7sarK5iKW6wByhs9/2.png";
-        }
-
-        if (nft.token_id == "2") {
-          nft.image_url =
-            "https://gateway.pinata.cloud/ipfs/QmSwGHG5VG8EPwZMuhLLt83WQYD6rC7sarK5iKW6wByhs9/3.png";
-        }
-
-        if (nft.token_id == "3") {
-          nft.image_url =
-            "https://gateway.pinata.cloud/ipfs/QmSwGHG5VG8EPwZMuhLLt83WQYD6rC7sarK5iKW6wByhs9/4.png";
-        }
-
-        if (nft.token_id == "4") {
-          nft.image_url =
-            "https://gateway.pinata.cloud/ipfs/QmSwGHG5VG8EPwZMuhLLt83WQYD6rC7sarK5iKW6wByhs9/5.png";
-        }
-      }
-    });
-
     //4) Merge the ceramic data about the posts with the opensea data about NFTs
     let mergedPosts = [];
     posts.forEach((post) => {
       assets.forEach((asset) => {
-        if (
-          post.token_id == asset.token_id &&
-          post.contract_address == asset.asset_contract.address
-        ) {
+        if (post.token_id == asset.token_id && post.contract_address == asset.asset_contract.address) {
           post.image_url = asset.image_url;
           post.symbol = asset.asset_contract.symbol;
           mergedPosts.push(post);
@@ -223,9 +178,5 @@ export const CeramicContextProvider = (props) => {
     newPost,
   };
 
-  return (
-    <CeramicContext.Provider value={value}>
-      {props.children}
-    </CeramicContext.Provider>
-  );
+  return <CeramicContext.Provider value={value}>{props.children}</CeramicContext.Provider>;
 };

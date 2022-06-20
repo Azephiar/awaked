@@ -1,17 +1,6 @@
 import { styled } from "@mui/material/styles";
-import {
-  getGradientString,
-  getGradientStringFromAddress,
-} from "../utils/utils";
-import {
-  Paper,
-  Button,
-  Typography,
-  Grid,
-  Box,
-  Drawer,
-  AppBar,
-} from "@mui/material";
+import { getGradientString, getGradientStringFromAddress } from "../utils/utils";
+import { Paper, Button, Typography, Grid, Box, AppBar } from "@mui/material";
 import { Constants } from "../utils/constants";
 
 export const PostPaper = styled(Paper)(({ theme }) => ({
@@ -48,8 +37,7 @@ export const Background = styled(Box)(({ theme }) => ({
   pointerEvents: "none",
   width: "200vw",
   height: "200vh",
-  background:
-    "radial-gradient(50% 50% at 50% 50%,#b5ead710 0,rgba(255,255,255,0) 100%)",
+  background: "radial-gradient(50% 50% at 50% 50%,#b5ead710 0,rgba(255,255,255,0) 100%)",
   transform: "translate(-50vw,-100vh)",
   zIndex: "-1",
 }));
@@ -62,8 +50,7 @@ export const BackgroundPostList = styled(Box)(({ theme }) => ({
   pointerEvents: "none",
   width: "200vw",
   height: "200vh",
-  background:
-    "radial-gradient(50% 50% at 50% 50%,#b5ead703 0,rgba(255,255,255,0) 100%)",
+  background: "radial-gradient(50% 50% at 50% 50%,#b5ead703 0,rgba(255,255,255,0) 100%)",
   transform: "translate(-50vw,-100vh)",
   zIndex: "-1",
 }));
@@ -98,14 +85,12 @@ export const GradientButton = styled(Button)(({ theme }) => ({
   fontWeight: "700",
 }));
 
-export const GradientTypography = styled(Typography)(
-  ({ color1, color2, backgroundsize }) => ({
-    WebkitTextFillColor: "transparent",
-    WebkitBackgroundClip: "text",
-    backgroundImage: getGradientString(color1, color2, "90deg"),
-    backgroundSize: backgroundsize ? backgroundsize : "150% auto",
-  })
-);
+export const GradientTypography = styled(Typography)(({ color1, color2, backgroundsize }) => ({
+  WebkitTextFillColor: "transparent",
+  WebkitBackgroundClip: "text",
+  backgroundImage: getGradientString(color1, color2, "90deg"),
+  backgroundSize: backgroundsize ? backgroundsize : "150% auto",
+}));
 
 export const AddressTypography = styled(Typography)(({ address }) => ({
   WebkitTextFillColor: "transparent",
@@ -167,32 +152,30 @@ export const AnimatedTypography = styled(Typography)(({ animate }) => ({
   },
 }));
 
-export const TextAnimation = styled(GradientTypography)(
-  ({ theme, width, height }) => ({
-    fontSize: 12,
-    fontWeight: 700,
-    paddingTop: "5px",
-    paddingBottom: "5px",
-    textAlign: "center",
+export const TextAnimation = styled(GradientTypography)(({ theme, width, height }) => ({
+  fontSize: 12,
+  fontWeight: 700,
+  paddingTop: "5px",
+  paddingBottom: "5px",
+  textAlign: "center",
 
-    "&::before": {
+  "&::before": {
+    content: '"RENOUNCING OWNERSHIP IS JUST A MARKETING TERM"',
+    animation: "topToBottom 20s infinite 0s",
+  },
+
+  "@keyframes topToBottom": {
+    "0%": {
       content: '"RENOUNCING OWNERSHIP IS JUST A MARKETING TERM"',
-      animation: "topToBottom 20s infinite 0s",
     },
-
-    "@keyframes topToBottom": {
-      "0%": {
-        content: '"RENOUNCING OWNERSHIP IS JUST A MARKETING TERM"',
-      },
-      "25%": {
-        content: '"BURNING TOKENS AT LAUNCH IS USELESS"',
-      },
-      "50%": {
-        content: '"90% OF AUDITS ARE MADE BY INCOMPETENTS"',
-      },
-      "75%": {
-        content: '"WANNA KNOW MORE ABOUT SCAMS? ASK US"',
-      },
+    "25%": {
+      content: '"BURNING TOKENS AT LAUNCH IS USELESS"',
     },
-  })
-);
+    "50%": {
+      content: '"90% OF AUDITS ARE MADE BY INCOMPETENTS"',
+    },
+    "75%": {
+      content: '"WANNA KNOW MORE ABOUT SCAMS? ASK US"',
+    },
+  },
+}));

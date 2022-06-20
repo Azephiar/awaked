@@ -1,29 +1,14 @@
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState, useEffect, useContext, createContext, useRef } from "react";
 import { initializeApp } from "firebase/app";
-import {
-  getFirestore,
-  addDoc,
-  doc,
-  getDoc,
-  collection,
-  query,
-  where,
-  getDocs,
-  orderBy,
-  limit,
-  startAfter,
-  onSnapshot,
-} from "firebase/firestore";
-import { CompressOutlined, LastPage } from "@mui/icons-material";
+import { getFirestore, addDoc, collection, query, getDocs, orderBy, limit, startAfter, onSnapshot } from "firebase/firestore";
 import { CeramicContext } from "./CeramicContext";
 
 // TODO: Replace with your app's Firebase project configuration
 const firebaseConfig = {
   apiKey: "AIzaSyCGjxmhEIDKlMqNKttEP_5gWJEWCl5ySAw",
   authDomain: "awakedweb3.firebaseapp.com",
-  databaseURL:
-    "https://awakedweb3-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL: "https://awakedweb3-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "awakedweb3",
   storageBucket: "awakedweb3.appspot.com",
   messagingSenderId: "5571569331",
@@ -66,11 +51,7 @@ export const FirebaseContextProvider = (props) => {
 
   useEffect(() => {
     const authenticateFirebaseUser = async () => {
-      await signInWithEmailAndPassword(
-        auth,
-        process.env.NEXT_PUBLIC_FIREBASE_EMAIL,
-        process.env.NEXT_PUBLIC_FIREBASE_PASSWORD
-      );
+      await signInWithEmailAndPassword(auth, process.env.NEXT_PUBLIC_FIREBASE_EMAIL, process.env.NEXT_PUBLIC_FIREBASE_PASSWORD);
     };
     authenticateFirebaseUser();
   }, []);
@@ -82,11 +63,7 @@ export const FirebaseContextProvider = (props) => {
 
   //Start listening to incoming posts. It's also used to fetch the first post in which the cursor used in the function 'getMorePosts' is also set.
   const startPostListener = () => {
-    const q = query(
-      collection(db, dbConfig.postCollection),
-      orderBy("timestamp", "desc"),
-      limit(dbConfig.numberPerPage)
-    );
+    const q = query(collection(db, dbConfig.postCollection), orderBy("timestamp", "desc"), limit(dbConfig.numberPerPage));
 
     onSnapshot(q, async (snapshot) => {
       setIsLoadingPosts(true);
@@ -99,9 +76,7 @@ export const FirebaseContextProvider = (props) => {
         }
       });
 
-      let newPosts = await ceramic.getAwakedPostListFromFirebasePostList(
-        streamIds
-      );
+      let newPosts = await ceramic.getAwakedPostListFromFirebasePostList(streamIds);
 
       awakedPostList = [...new Set([...newPosts, ...awakedPostList])];
 
@@ -136,9 +111,7 @@ export const FirebaseContextProvider = (props) => {
       streamIds.push(doc.data());
     });
 
-    let oldPosts = await ceramic.getAwakedPostListFromFirebasePostList(
-      streamIds
-    );
+    let oldPosts = await ceramic.getAwakedPostListFromFirebasePostList(streamIds);
 
     if (snapshot.docs.length < dbConfig.numberPerPage) {
       setHasMorePosts(false);
@@ -152,25 +125,11 @@ export const FirebaseContextProvider = (props) => {
   };
 
   const newPost = async (postListStreamID, postStreamID, did, timestamp) => {
-    let postDoc = await writePostToFirebase(
-      postListStreamID,
-      postStreamID,
-      did,
-      timestamp
-    );
-    let postListDoc = await writePostListsToFirebase(
-      postListStreamID,
-      did,
-      timestamp
-    );
+    let postDoc = await writePostToFirebase(postListStreamID, postStreamID, did, timestamp);
+    let postListDoc = await writePostListsToFirebase(postListStreamID, did, timestamp);
   };
 
-  const writePostToFirebase = async (
-    postListStreamID,
-    postStreamID,
-    did,
-    timestamp
-  ) => {
+  const writePostToFirebase = async (postListStreamID, postStreamID, did, timestamp) => {
     try {
       const doc = await addDoc(collection(db, dbConfig.postCollection), {
         postsListStreamUrl: postListStreamID.toUrl().toString(),
@@ -218,9 +177,5 @@ export const FirebaseContextProvider = (props) => {
     startPostListener,
   };
 
-  return (
-    <FirebaseContext.Provider value={value}>
-      {props.children}
-    </FirebaseContext.Provider>
-  );
+  return <FirebaseContext.Provider value={value}>{props.children}</FirebaseContext.Provider>;
 };

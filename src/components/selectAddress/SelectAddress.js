@@ -6,7 +6,6 @@ import { ContextManager } from "../context/ContextManager";
 import { WalletContext } from "../context/WalletContext";
 
 const SelectAddress = () => {
-  const { nftList, setNFTDIDOf } = useContext(ContextManager);
   const wallet = useContext(WalletContext);
 
   const theme = useTheme();

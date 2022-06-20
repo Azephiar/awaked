@@ -17,7 +17,6 @@ import { FirebaseContextProvider } from "../src/components/context/FirebaseConte
 import { ContextManager } from "../src/components/context/ContextManager";
 import { CeramicContextProvider } from "../src/components/context/CeramicContext";
 import { AlertContextProvider } from "../src/components/context/AlertContext";
-import { useRouter } from "next/router";
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
@@ -37,10 +36,7 @@ export default function MyApp(props) {
 
           <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-            rel="stylesheet"
-          />
+          <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
         </Head>
         <AlertContextProvider>
           <WalletContextProvider>

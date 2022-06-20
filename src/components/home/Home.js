@@ -1,32 +1,13 @@
-import {
-  Container,
-  Button,
-  Grid,
-  Stack,
-  Paper,
-  Box,
-  Typography,
-  Divider,
-  CircularProgress,
-  Skeleton,
-} from "@mui/material";
-import { ContextManager } from "../context/ContextManager";
-import { useContext, useState, useEffect, useRef, useCallback } from "react";
+import { Grid, Box, CircularProgress } from "@mui/material";
+import { useContext, useEffect, useRef, useCallback } from "react";
 import Post from "./post/Post";
 import NewPost from "./post/NewPost";
 import ConnectWith3ID from "./post/ConnectWith3ID";
 import { PostLoading, UserLoading } from "./post/PostLoading";
-
 import GridDivider from "../custom/GridDivider";
-
 import { GradientTypography } from "../styled";
-import { TileLoader } from "@glazed/tile-loader";
-import { getNftDataFromDIDs } from "../../utils/openseaApi";
-import { getNftDataFromNftDid } from "../../utils/utils";
-
 import { CeramicContext } from "../context/CeramicContext";
 import { FirebaseContext } from "../context/FirebaseContext";
-import { WalletContext } from "../context/WalletContext";
 import { useTheme } from "@emotion/react";
 
 const Home = () => {
@@ -66,13 +47,7 @@ const Home = () => {
     let skeletonArray = [];
     for (let i = 0; i < 10; i++) {
       skeletonArray.push(
-        <Grid
-          key={i}
-          item
-          container
-          direction="column"
-          sx={{ marginBottom: "20px" }}
-        >
+        <Grid key={i} item container direction="column" sx={{ marginBottom: "20px" }}>
           <PostLoading />
         </Grid>
       );
@@ -89,12 +64,7 @@ const Home = () => {
   };
 
   return (
-    <Grid
-      container
-      item
-      justifyContent="center"
-      sx={{ width: { xs: "94%", md: "35%" } }}
-    >
+    <Grid container item justifyContent="center" sx={{ width: { xs: "94%", md: "35%" } }}>
       <Grid item container direction="column" justifyContent="center">
         {showHeader()}
       </Grid>
@@ -110,12 +80,7 @@ const Home = () => {
           width: "100%",
         }}
       >
-        <GradientTypography
-          fontSize={17}
-          fontWeight={800}
-          align="right"
-          sx={{ marginTop: "12px", marginBottom: "12px" }}
-        >
+        <GradientTypography fontSize={17} fontWeight={800} align="right" sx={{ marginTop: "12px", marginBottom: "12px" }}>
           LATEST POSTS ▼
         </GradientTypography>
       </Grid>
@@ -135,19 +100,10 @@ const Home = () => {
         )}
       </Grid>
 
-      <Grid
-        item
-        container
-        justifyContent="center"
-        alignContent="center"
-        sx={{ width: "100%" }}
-      >
+      <Grid item container justifyContent="center" alignContent="center" sx={{ width: "100%" }}>
         {firebase.awakedPostList.length > 0 && <Box ref={lastPostRef}></Box>}
         {firebase.awakedPostList.length > 0 && firebase.hasMorePosts && (
-          <CircularProgress
-            sx={{ marginBottom: "75px", marginTop: "10px" }}
-            size={25}
-          />
+          <CircularProgress sx={{ marginBottom: "75px", marginTop: "10px" }} size={25} />
         )}
       </Grid>
     </Grid>

@@ -1,13 +1,10 @@
 import { Box, Typography, Button, Skeleton } from "@mui/material";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
-
 import { GradientTypography } from "../styled";
 import { useContext } from "react";
-
 import { useTheme } from "@emotion/react";
 import { ContextManager } from "../context/ContextManager";
 import { WalletContext } from "../context/WalletContext";
@@ -42,11 +39,7 @@ const SelectNFT = () => {
 
     if (isLoadingNftList) {
       return (
-        <Grid
-          container
-          spacing={{ xs: 1, sm: 2, md: 2, xl: 3 }}
-          sx={{ marginTop: "60px" }}
-        >
+        <Grid container spacing={{ xs: 1, sm: 2, md: 2, xl: 3 }} sx={{ marginTop: "60px" }}>
           <NftListSkeletonLoading />
         </Grid>
       );
@@ -84,9 +77,7 @@ const SelectNFT = () => {
       return (
         <>
           <Typography align="center" fontSize={13}>
-            {"You currently don't own any NFT on " +
-              wallet.address.substring(0, 8).toUpperCase() +
-              ". Keep in mind awaked supports ERC721 only."}
+            {"You currently don't own any NFT on " + wallet.address.substring(0, 8).toUpperCase() + ". Keep in mind awaked supports ERC721 only."}
           </Typography>
           <Button
             disableRipple

@@ -1,19 +1,10 @@
-import {
-  Button,
-  Box,
-  CircularProgress,
-  Alert,
-  Typography,
-  Divider,
-} from "@mui/material";
-
-import { useContext, useEffect, useState } from "react";
+import { Button, Box, CircularProgress } from "@mui/material";
+import { useContext } from "react";
 import { useTheme } from "@emotion/react";
 import { GradientTypography } from "../styled";
-import { getGradientString } from "../../utils/utils";
 import { WalletContext } from "../context/WalletContext";
 import { AlertContext } from "../context/AlertContext";
-const ConnectWallet = ({ connect }) => {
+const ConnectWallet = () => {
   const wallet = useContext(WalletContext);
   const alert = useContext(AlertContext);
   const theme = useTheme();
@@ -37,10 +28,6 @@ const ConnectWallet = ({ connect }) => {
     >
       <Box
         sx={{
-          // height:
-          //   "calc(100vh - " +
-          //   theme.components.MuiAppBar.styleOverrides.root.height +
-          //   "px)",
           display: "flex",
           flexDirection: "column",
           paddingTop: "120px",
@@ -87,36 +74,9 @@ const ConnectWallet = ({ connect }) => {
           }}
           onClick={() => connectWithWeb3()}
         >
-          {wallet.isConnecting ? (
-            <CircularProgress size={20} sx={{ color: "white" }} />
-          ) : (
-            "CONNECT"
-          )}
+          {wallet.isConnecting ? <CircularProgress size={20} sx={{ color: "white" }} /> : "CONNECT"}
         </Button>
       </Box>
-      {/* <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <GradientTypography
-          sx={{ fontWeight: 800, fontSize: 35, lineHeight: 1.15 }}
-          color1={theme.palette.primary.main}
-          color2={theme.palette.secondary.main}
-        >
-          What's awaked?
-        </GradientTypography>
-        <Typography fontWeight={500} fontSize={15} sx={{ marginTop: "15px" }}>
-          It's an NFT-only decentralized social network built using ceramic IDX
-          protocol and decentralized identifiers (DIDs).
-        </Typography>
-        <Typography fontWeight={500} fontSize={15} sx={{ marginTop: "15px" }}>
-          The combination of these technologies allows NFTs to control
-          decentralized documents. If an NFT gets sold, the rights to write and
-          update the documents gets also transfered.
-        </Typography>
-      </Box> */}
     </Box>
   );
 };

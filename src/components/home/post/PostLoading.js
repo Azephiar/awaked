@@ -4,20 +4,8 @@ export const PostLoading = () => {
   const theme = useTheme();
   return (
     <>
-      <Grid
-        item
-        container
-        direction="row"
-        justifyContent="flex-start"
-        wrap="nowrap"
-      >
-        <Grid
-          item
-          container
-          direction="column"
-          xs="auto"
-          sx={{ marginRight: "3px" }}
-        >
+      <Grid item container direction="row" justifyContent="flex-start" wrap="nowrap">
+        <Grid item container direction="column" xs="auto" sx={{ marginRight: "3px" }}>
           <Skeleton
             variant="rectangular"
             width="50px"
@@ -92,21 +80,8 @@ export const UserLoading = () => {
             </Grid>
           </Grid>
 
-          <Grid
-            item
-            container
-            direction="column"
-            xs={10}
-            justifyContent="center"
-          >
-            <Grid
-              item
-              container
-              direction="row"
-              xs="auto"
-              justifyContent="space-between"
-              align="center"
-            >
+          <Grid item container direction="column" xs={10} justifyContent="center">
+            <Grid item container direction="row" xs="auto" justifyContent="space-between" align="center">
               <Grid item container direction="row" xs="auto" spacing={1}>
                 <Grid item>
                   <Skeleton

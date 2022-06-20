@@ -1,33 +1,7 @@
-import {
-  Container,
-  Button,
-  Grid,
-  Stack,
-  Paper,
-  Box,
-  Typography,
-  Input,
-  TextareaAutosize,
-  TextField,
-  CircularProgress,
-  Snackbar,
-  Alert,
-  Link,
-} from "@mui/material";
-import { ContextManager } from "../../context/ContextManager";
-import { useContext, useEffect, useRef, useState } from "react";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
-import {
-  AwaPaper,
-  GradientTypography,
-  PostPaper,
-  AddressTypography,
-} from "../../styled.js";
-import { getGradientStringFromAddress } from "../../../utils/utils";
-import NFTIndentifier from "./NFTIndentifier";
-import ProfilePicture from "./ProfilePicture";
+import { Button, Grid, CircularProgress, Link } from "@mui/material";
+import { useContext } from "react";
+import { GradientTypography } from "../../styled.js";
 import { CeramicContext } from "../../context/CeramicContext";
-import { FirebaseContext } from "../../context/FirebaseContext";
 import { useTheme } from "@emotion/react";
 import { Launch } from "@mui/icons-material";
 
@@ -63,25 +37,11 @@ const ConnectWith3ID = () => {
           }}
           onClick={connectWith3ID}
         >
-          {ceramic.is3IDConnecting ? (
-            <CircularProgress size={20} sx={{ color: "white" }} />
-          ) : (
-            "CONNECT WITH 3ID"
-          )}
+          {ceramic.is3IDConnecting ? <CircularProgress size={20} sx={{ color: "white" }} /> : "CONNECT WITH 3ID"}
         </Button>
       </Grid>
-      <Grid
-        item
-        container
-        direction="row"
-        justifyContent="center"
-        sx={{ marginTop: "10px" }}
-      >
-        <Link
-          href="https://blog.ceramic.network/what-is-3id-connect/"
-          target="_blank"
-          sx={{ fontSize: 12 }}
-        >
+      <Grid item container direction="row" justifyContent="center" sx={{ marginTop: "10px" }}>
+        <Link href="https://blog.ceramic.network/what-is-3id-connect/" target="_blank" sx={{ fontSize: 12 }}>
           What is 3ID?
           <Launch sx={{ marginLeft: "2px" }} fontSize="10" />
         </Link>

@@ -1,16 +1,5 @@
-import {
-  Drawer,
-  List,
-  ListItemIcon,
-  ListItemText,
-  ListItem,
-  ListItemButton,
-  Typography,
-  Box,
-} from "@mui/material";
-import { styled, useTheme } from "@mui/material/styles";
-import { StyledDrawer } from "../styled";
-import { Fade } from "@mui/material";
+import { Drawer, List, ListItemText, ListItem, ListItemButton } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { deleteNFTLocalCache } from "../context/LocalStorageManager";
 import { WalletContext } from "../context/WalletContext";
 import { useContext } from "react";
@@ -36,8 +25,7 @@ const NavBarMenu = ({ open, onClose }) => {
         PaperProps={{
           sx: {
             width: { xs: "100%", md: "375px" },
-            backgroundImage:
-              "radial-gradient(50% 50% at 50% 50%,#b5ead703 0,rgba(255,255,255,0) 100%)",
+            backgroundImage: "radial-gradient(50% 50% at 50% 50%,#b5ead703 0,rgba(255,255,255,0) 100%)",
             transform: "translate(-50vw,-100vh)",
             boxShadow: 0,
           },
@@ -62,10 +50,7 @@ const NavBarMenu = ({ open, onClose }) => {
             key="DISCORD"
             sx={{ paddingRight: "25px", paddingLeft: "25px" }}
           >
-            <ListItemText
-              primary="DISCORD"
-              primaryTypographyProps={{ fontSize: 22, fontWeight: 800 }}
-            />
+            <ListItemText primary="DISCORD" primaryTypographyProps={{ fontSize: 22, fontWeight: 800 }} />
           </ListItem>
 
           <ListItem
@@ -76,21 +61,11 @@ const NavBarMenu = ({ open, onClose }) => {
             key="TWITTER"
             sx={{ paddingRight: "25px", paddingLeft: "25px" }}
           >
-            <ListItemText
-              primary="TWITTER"
-              primaryTypographyProps={{ fontSize: 22, fontWeight: 800 }}
-            />
+            <ListItemText primary="TWITTER" primaryTypographyProps={{ fontSize: 22, fontWeight: 800 }} />
           </ListItem>
 
-          <ListItemButton
-            key="LOGOUT"
-            onClick={() => logout()}
-            sx={{ paddingRight: "25px", paddingLeft: "25px" }}
-          >
-            <ListItemText
-              primary="LOGOUT"
-              primaryTypographyProps={{ fontSize: 22, fontWeight: 800 }}
-            />
+          <ListItemButton key="LOGOUT" onClick={() => logout()} sx={{ paddingRight: "25px", paddingLeft: "25px" }}>
+            <ListItemText primary="LOGOUT" primaryTypographyProps={{ fontSize: 22, fontWeight: 800 }} />
           </ListItemButton>
         </List>
       </Drawer>
